@@ -5,7 +5,16 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 <style>
-
+.thumb{
+  border-radius: 50%;
+  max-width: 80px;
+  max-height: 80px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  width: 50%;
+}
 .laravel{
   background-color: #00001a;
 }
@@ -88,7 +97,6 @@
 
                         </tr>
                         @foreach($products as $data)
-
                             <tr>
                             <td>{{$data->product_name}}</td>
                             <td>{{$data->unit}}</td>
@@ -96,7 +104,7 @@
                             <td>{{$data->date_of_expiry}}</td>
                             <td>{{$data->available_inventory}}</td>
                             <td>{{$data->available_inventory_cost}}</td>
-                            <td>{{$data->image}}</td>
+                            <td><img src="{{$data->image}}" class="thumb"></td>
                             <td><a href="#" onclick="document.getElementById('updateProductForm').style.display='block'">Edit</a></td>
                             <td><a href="{{ url('/delete-product',[$data->id]) }}">Delete</a></td>
                             </tr>
@@ -110,7 +118,7 @@
                                 </header>
 
                                 <div class="w3-container">
-                                    <form action="{{ url('/update-product',[$data->id]) }}" method="post">
+                                    <form action="{{ url('/update-product',[$data->id]) }}" enctype="multipart/form-data" method="post">
                                                         @csrf
                                                         <label>Product Name</label>
                                                         <input type="text" class="form-control form-control-sm" name="product_name">
@@ -130,8 +138,9 @@
                                                         <label>Available Inventory Cost</label>
                                                         <input type="text" class="form-control form-control-sm" name="available_inventory_cost">
 
-                                                        <label>Image</label>
-                                                        <input type="text" class="form-control form-control-sm" name="image">
+                                                        <label>Image</label><br>
+                                                        <input type="file" accept="image/*" name="image">
+
 
                                                         <button type="submit" class="button preview">Update</button>
                                     </form>
@@ -156,7 +165,7 @@
     </header>
 
     <div class="w3-container">
-    <form action="{{url('/create-product')}}" method="post">
+    <form action="{{url('/create-product')}}" enctype="multipart/form-data" method="post">
                         @csrf
                         <label>Product Name</label>
                         <input type="text" class="form-control form-control-sm" name="product_name">
@@ -176,8 +185,9 @@
                         <label>Available Inventory Cost</label>
                         <input type="text" class="form-control form-control-sm" name="available_inventory_cost">
 
-                        <label>Image</label>
-                        <input type="text" class="form-control form-control-sm" name="image">
+                        <label>Image</label><br>
+                        <input type="file" accept="image/*" name="image">
+
 
                         <button type="submit" class="button preview">Create</button>
     </form>

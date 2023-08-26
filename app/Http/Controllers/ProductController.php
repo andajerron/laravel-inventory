@@ -15,7 +15,8 @@ class ProductController extends Controller
        $dateOfExpiry =  $request->input('date_of_expiry');
        $availInventory =  $request->input('available_inventory');
        $availInventoryCost =  $request->input('available_inventory_cost');
-       $image =  $request->input('image');
+       $image =  $request->file('image');
+
 
        DB::table('products')->insert(['product_name'=>$prodName,
                         'unit'=>$unit,
@@ -38,7 +39,8 @@ class ProductController extends Controller
         $dateOfExpiry =  $request->input('date_of_expiry');
         $availInventory =  $request->input('available_inventory');
         $availInventoryCost =  $request->input('available_inventory_cost');
-        $image =  $request->input('image');
+        $image =  $request->file('image');
+
 
         DB::table('products')->where(['id'=>$id])->update(['product_name'=>$prodName,
                          'unit'=>$unit,
